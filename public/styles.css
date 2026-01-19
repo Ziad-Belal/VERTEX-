@@ -404,8 +404,9 @@
 
         .system-card-links {
             display: flex;
-            align-items: center;
-            gap: 20px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
         }
 
         /* -------------------------------------
