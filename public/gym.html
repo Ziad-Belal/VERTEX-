@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Management System - Vertex Systems</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for gym page */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('gym-background.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            text-align: center;
+            padding: 50px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .title {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .overview {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin-bottom: 50px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .interactive-item {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-item:hover {
+            transform: scale(1.05);
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .interactive-item .hover-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .interactive-item:hover .hover-content {
+            opacity: 1;
+        }
+
+        .interactive-item h3 {
+            margin: 0 0 10px 0;
+        }
+
+        .interactive-item p {
+            margin: 0;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .back-link:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-video"></div>
+
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <div class="content">
+        <h1 class="title">Gym Management System</h1>
+        <p class="overview">
+            Our comprehensive Gym Management System streamlines operations for fitness centers of all sizes.
+            From member registration and class scheduling to payment processing and analytics, we provide
+            everything you need to run your gym efficiently and grow your business.
+        </p>
+
+        <div class="interactive-grid">
+            <div class="interactive-item">
+                <h3>Member Management</h3>
+                <p>Track memberships, attendance, and member profiles.</p>
+                <div class="hover-content">
+                    <h3>Member Management Details</h3>
+                    <p>Detailed information about member management features: registration, check-ins, membership plans,
+                        payment tracking, etc. [Add your photo/GIF here]</p>
+                    <!-- Placeholder for image/GIF -->
+                    <img src="member-management.jpg" alt="Member Management" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+
+            <div class="interactive-item">
+                <h3>Class Scheduling</h3>
+                <p>Manage group classes, personal training sessions, and equipment bookings.</p>
+                <div class="hover-content">
+                    <h3>Class Scheduling Details</h3>
+                    <p>Information about scheduling features: calendar view, instructor assignments, capacity
+                        management, etc. [Add your photo/GIF here]</p>
+                    <!-- Placeholder for image/GIF -->
+                    <img src="class-scheduling.jpg" alt="Class Scheduling" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+
+            <div class="interactive-item">
+                <h3>Payment Processing</h3>
+                <p>Handle memberships, class fees, and merchandise sales.</p>
+                <div class="hover-content">
+                    <h3>Payment Processing Details</h3>
+                    <p>Details on payment features: integrated payment gateways, invoicing, discounts, reporting, etc.
+                        [Add your photo/GIF here]</p>
+                    <!-- Placeholder for image/GIF -->
+                    <img src="payment-processing.jpg" alt="Payment Processing" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+
+            <div class="interactive-item">
+                <h3>Analytics & Reporting</h3>
+                <p>Gain insights with detailed reports and performance metrics.</p>
+                <div class="hover-content">
+                    <h3>Analytics & Reporting Details</h3>
+                    <p>Information about analytics: attendance reports, revenue tracking, member retention, custom
+                        dashboards, etc. [Add your photo/GIF here]</p>
+                    <!-- Placeholder for image/GIF -->
+                    <img src="analytics-reporting.jpg" alt="Analytics & Reporting"
+                        style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+
+            <div class="interactive-item">
+                <h3>Inventory Management</h3>
+                <p>Track equipment, supplies, and maintenance schedules.</p>
+                <div class="hover-content">
+                    <h3>Inventory Management Details</h3>
+                    <p>Details on inventory features: equipment tracking, maintenance reminders, supplier management,
+                        etc. [Add your photo/GIF here]</p>
+                    <!-- Placeholder for image/GIF -->
+                    <img src="inventory-management.jpg" alt="Inventory Management"
+                        style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+
+            <div class="interactive-item">
+                <h3>Staff Management</h3>
+                <p>Manage trainers, schedules, and performance.</p>
+                <div class="hover-content">
+                    <h3>Staff Management Details</h3>
+                    <p>Information about staff features: employee profiles, shift scheduling, payroll integration, etc.
+                        [Add your photo/GIF here]</p>
+                    <!-- Placeholder for image/GIF -->
+                    <img src="staff-management.jpg" alt="Staff Management" style="max-width: 100%; height: auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
