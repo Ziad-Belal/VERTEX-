@@ -624,6 +624,15 @@
             margin-left: 15px;
         }
 
+        @media (max-width: 1024px) {
+            .interactive-container {
+                flex-direction: column;
+            }
+            .interactive-tabs, .interactive-image {
+                width: 100%;
+            }
+        }
+
         @media (max-width: 768px) {
             nav {
                 padding: 20px 30px;
