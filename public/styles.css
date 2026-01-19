@@ -402,6 +402,12 @@
             content: '→';
         }
 
+        .system-card-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         /* -------------------------------------
            NEW STYLES FOR CUSTOM SECTION 
            ------------------------------------- */

@@ -7,6 +7,15 @@
     <title>Gym Management System - Vertex Systems</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-darker: #000000;
+            --gold: #d4af37;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --border-gray: #2a2a2a;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -120,21 +129,24 @@
 
         .back-link {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 30px;
+            left: 30px;
             color: white;
             text-decoration: none;
-            font-size: 1.2em;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: background 0.3s;
+            font-size: 1em;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: background 0.3s, color 0.3s;
+            z-index: 1001;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .back-link:hover {
-            background: rgba(0, 0, 0, 0.8);
+            background: var(--gold);
+            color: var(--bg-darker);
         }
-        
+
         @media (max-width: 900px) {
             .interactive-container {
                 flex-direction: column;
@@ -143,10 +155,11 @@
                 width: 100%;
             }
             .interactive-image-wrapper {
+                position: relative;
                 top: 0;
+                margin-top: 40px;
             }
         }
-
     </style>
 </head>
 
@@ -200,13 +213,13 @@
                 item.classList.add('active');
                 
                 const newImage = item.getAttribute('data-image');
-                if (imageElement.src !== newImage) {
-                    imageElement.style.opacity = 0;
-                    setTimeout(() => {
-                        imageElement.src = newImage;
-                        imageElement.style.opacity = 1;
-                    }, 300);
-                }
+                if (imageElement.src.includes(newImage)) return;
+
+                imageElement.style.opacity = 0;
+                setTimeout(() => {
+                    imageElement.src = newImage;
+                    imageElement.style.opacity = 1;
+                }, 300);
             });
         });
     </script>
