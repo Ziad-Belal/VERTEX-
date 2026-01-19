@@ -12,18 +12,10 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-        }
-
-        .background-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             background-image: url('gym-background.jpg');
             background-size: cover;
             background-position: center;
-            z-index: -1;
+            background-attachment: fixed;
         }
 
         .content {
@@ -37,72 +29,80 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            background: rgba(0, 0, 0, 0.6);
         }
 
         .title {
-            font-size: 3em;
+            font-size: 3.5em;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
 
         .overview {
-            font-size: 1.2em;
+            font-size: 1.3em;
             max-width: 800px;
             margin-bottom: 50px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            line-height: 1.6;
         }
 
-        .interactive-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
+        .interactive-container {
+            display: flex;
+            gap: 30px;
+            max-width: 1200px;
             width: 100%;
         }
 
+        .interactive-tabs {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 40%;
+        }
+
         .interactive-item {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
             cursor: pointer;
             transition: transform 0.3s, background 0.3s;
-            position: relative;
-            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: left;
         }
 
         .interactive-item:hover {
-            transform: scale(1.05);
-            background: rgba(0, 0, 0, 0.7);
+            transform: translateX(-10px);
+            background: rgba(255, 255, 255, 0.2);
         }
 
-        .interactive-item .hover-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            color: black;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .interactive-item:hover .hover-content {
-            opacity: 1;
+        .interactive-item .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
         }
 
         .interactive-item h3 {
             margin: 0 0 10px 0;
+            font-size: 1.3em;
         }
 
         .interactive-item p {
             margin: 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .interactive-image {
+            width: 60%;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .interactive-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.4s;
         }
 
         .back-link {
@@ -115,105 +115,87 @@
             background: rgba(0, 0, 0, 0.5);
             padding: 10px 20px;
             border-radius: 5px;
+            transition: background 0.3s;
         }
 
         .back-link:hover {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
         }
+
+        .cta-button {
+            margin-top: 40px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: white;
+            background: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #0056b3;
+        }
+
     </style>
 </head>
 
 <body>
-    <div class="background-video"></div>
-
     <a href="index.html" class="back-link">← Back to Home</a>
 
     <div class="content">
-        <h1 class="title">Gym Management System</h1>
+        <h1 class="title">Advanced Gym Management System</h1>
         <p class="overview">
-            Our comprehensive Gym Management System streamlines operations for fitness centers of all sizes.
-            From member registration and class scheduling to payment processing and analytics, we provide
-            everything you need to run your gym efficiently and grow your business.
+            Transform your fitness center with our state-of-the-art Gym Management System. Our comprehensive platform is designed to streamline your operations, enhance member experience, and provide powerful insights to drive growth. From automating daily tasks to offering seamless integration, we have everything you need to manage your gym efficiently.
         </p>
 
-        <div class="interactive-grid">
-            <div class="interactive-item">
-                <h3>Member Management</h3>
-                <p>Track memberships, attendance, and member profiles.</p>
-                <div class="hover-content">
-                    <h3>Member Management Details</h3>
-                    <p>Detailed information about member management features: registration, check-ins, membership plans,
-                        payment tracking, etc. [Add your photo/GIF here]</p>
-                    <!-- Placeholder for image/GIF -->
-                    <img src="member-management.jpg" alt="Member Management" style="max-width: 100%; height: auto;">
+        <div class="interactive-container">
+            <div class="interactive-tabs">
+                <div class="interactive-item" data-image="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                    <div class="icon">👥</div>
+                    <h3>Member Management</h3>
+                    <p>Easily manage member profiles, track attendance, and handle membership plans.</p>
+                </div>
+                <div class="interactive-item" data-image="https://images.unsplash.com/photo-1548690312-e3b511d5b111?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                    <div class="icon">📅</div>
+                    <h3>Class Scheduling</h3>
+                    <p>Organize group classes, personal training sessions, and equipment bookings.</p>
+                </div>
+                <div class="interactive-item" data-image="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                    <div class="icon">💳</div>
+                    <h3>Payment Processing</h3>
+                    <p>Automate billing, accept online payments, and manage invoices seamlessly.</p>
+                </div>
+                <div class="interactive-item" data-image="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+                    <div class="icon">📊</div>
+                    <h3>Analytics & Reporting</h3>
+                    <p>Gain valuable insights with our detailed reports and performance metrics.</p>
                 </div>
             </div>
-
-            <div class="interactive-item">
-                <h3>Class Scheduling</h3>
-                <p>Manage group classes, personal training sessions, and equipment bookings.</p>
-                <div class="hover-content">
-                    <h3>Class Scheduling Details</h3>
-                    <p>Information about scheduling features: calendar view, instructor assignments, capacity
-                        management, etc. [Add your photo/GIF here]</p>
-                    <!-- Placeholder for image/GIF -->
-                    <img src="class-scheduling.jpg" alt="Class Scheduling" style="max-width: 100%; height: auto;">
-                </div>
-            </div>
-
-            <div class="interactive-item">
-                <h3>Payment Processing</h3>
-                <p>Handle memberships, class fees, and merchandise sales.</p>
-                <div class="hover-content">
-                    <h3>Payment Processing Details</h3>
-                    <p>Details on payment features: integrated payment gateways, invoicing, discounts, reporting, etc.
-                        [Add your photo/GIF here]</p>
-                    <!-- Placeholder for image/GIF -->
-                    <img src="payment-processing.jpg" alt="Payment Processing" style="max-width: 100%; height: auto;">
-                </div>
-            </div>
-
-            <div class="interactive-item">
-                <h3>Analytics & Reporting</h3>
-                <p>Gain insights with detailed reports and performance metrics.</p>
-                <div class="hover-content">
-                    <h3>Analytics & Reporting Details</h3>
-                    <p>Information about analytics: attendance reports, revenue tracking, member retention, custom
-                        dashboards, etc. [Add your photo/GIF here]</p>
-                    <!-- Placeholder for image/GIF -->
-                    <img src="analytics-reporting.jpg" alt="Analytics & Reporting"
-                        style="max-width: 100%; height: auto;">
-                </div>
-            </div>
-
-            <div class="interactive-item">
-                <h3>Inventory Management</h3>
-                <p>Track equipment, supplies, and maintenance schedules.</p>
-                <div class="hover-content">
-                    <h3>Inventory Management Details</h3>
-                    <p>Details on inventory features: equipment tracking, maintenance reminders, supplier management,
-                        etc. [Add your photo/GIF here]</p>
-                    <!-- Placeholder for image/GIF -->
-                    <img src="inventory-management.jpg" alt="Inventory Management"
-                        style="max-width: 100%; height: auto;">
-                </div>
-            </div>
-
-            <div class="interactive-item">
-                <h3>Staff Management</h3>
-                <p>Manage trainers, schedules, and performance.</p>
-                <div class="hover-content">
-                    <h3>Staff Management Details</h3>
-                    <p>Information about staff features: employee profiles, shift scheduling, payroll integration, etc.
-                        [Add your photo/GIF here]</p>
-                    <!-- Placeholder for image/GIF -->
-                    <img src="staff-management.jpg" alt="Staff Management" style="max-width: 100%; height: auto;">
-                </div>
+            <div class="interactive-image">
+                <img src="https://images.unsplash.com/photo-1581009137042-c552e485697a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" id="gym-feature-image" alt="Gym Feature">
             </div>
         </div>
+        
+        <button class="cta-button">Contact Us</button>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const interactiveItems = document.querySelectorAll('.interactive-item');
+        const imageElement = document.getElementById('gym-feature-image');
+
+        interactiveItems.forEach(item => {
+            item.addEventListener('mouseover', () => {
+                const newImage = item.getAttribute('data-image');
+                imageElement.style.opacity = 0;
+                setTimeout(() => {
+                    imageElement.src = newImage;
+                    imageElement.style.opacity = 1;
+                }, 400);
+            });
+        });
+    </script>
 </body>
 
 </html>
