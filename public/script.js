@@ -41,6 +41,7 @@ const translations = {
         // Cards
         card1Title: "Gym Management",
         card1Desc: "Complete fitness center solution with member tracking, class scheduling, payment processing, and performance analytics.",
+        viewDetails: "View Details",
 
         card2Title: "Pharmacy System",
         card2Desc: "Streamline pharmacy operations with inventory management, prescription tracking, sales monitoring, and compliance tools.",
@@ -85,6 +86,7 @@ const translations = {
         // Cards
         card1Title: "إدارة الصالات الرياضية",
         card1Desc: "حل شامل للمراكز الرياضية مع تتبع الأعضاء وجدولة الفصول ومعالجة المدفوعات وتحليلات الأداء.",
+        viewDetails: "عرض التفاصيل",
 
         card2Title: "نظام الصيدليات",
         card2Desc: "تنظيم عمليات الصيدلية مع إدارة المخزون وتتبع الوصفات الطبية ومراقبة المبيعات وأدوات الامتثال.",
@@ -96,7 +98,7 @@ const translations = {
         card4Desc: "منصة شاملة للمطاعم مع نقاط البيع وإدارة الطاولات وشاشة المطبخ ومراقبة المخزون وتكامل التوصيل.",
 
         card5Title: "الصالونات والمنتجعات",
-        card5Desc: "نظام حجز ذكي للصالونات والمنتجعات الصحية مع إدارة المواعيد وجدولة الموظفين ومبيعات المنتجات.",
+        card5Desc: "نظام حجز ذكي للصالونات والمنتجعات الصحية مع إدارة المواعيد وجدولة الموظفين ومبيعات المنتجات وأدوات العملاء.",
 
         card6Title: "إدارة المتاجر",
         card6Desc: "حل شامل لتجارة التجزئة مع نقاط البيع وإدارة المخزون وأدوات علاقات العملاء والتحليلات.",
