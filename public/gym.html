@@ -1,275 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gym Management System - Vertex Systems</title>
+    <title>Gym Management Ecosystem | Vertex Systems</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        :root {
-            --bg-dark: #0a0a0a;
-            --bg-darker: #000000;
-            --gold: #d4af37;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-        }
-
         body {
+            background: var(--bg-black);
+            color: var(--text-white);
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 0;
             overflow-x: hidden;
-            background-image: url('Dashboard.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
         }
 
-        .content {
-            position: relative;
-            z-index: 1;
-            color: white;
-            padding: 50px;
-            min-height: 100vh;
+        .gym-experience-wrapper {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
+            padding: 120px 20px;
+            min-height: 100vh;
+            background: radial-gradient(circle at top center, #0f0f1a 0%, #000 80%);
         }
 
-        .title {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        }
-
-        .overview {
-            font-size: 1.3em;
-            max-width: 900px;
+        .header-section {
             text-align: center;
-            margin-bottom: 50px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-bottom: 80px;
+            max-width: 900px;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .header-section h1 {
+            font-size: clamp(2.5em, 6vw, 4.5em);
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(to right, #fff, var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .header-section p {
+            font-size: 1.2em;
+            color: var(--text-slate);
             line-height: 1.6;
         }
 
-        .interactive-container {
+        .warp-showcase {
             display: flex;
-            gap: 40px;
-            max-width: 1200px;
+            gap: 60px;
+            max-width: 1400px;
             width: 100%;
-            align-items: flex-start;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInUp 1s ease forwards;
         }
 
-        .interactive-tabs {
-            flex: 0 0 45%;
+        .feature-list {
+            flex: 0 0 420px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
         }
 
-        .interactive-item {
-            background: rgba(10, 10, 10, 0.7);
-            padding: 25px;
-            border-radius: 10px;
+        .feature-tab {
+            padding: 24px;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-dark);
+            border-radius: var(--radius-md);
             cursor: pointer;
-            transition: transform 0.3s, background 0.3s;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: left;
-            border-left: 5px solid transparent;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .interactive-item.active {
-            background: rgba(212, 175, 55, 0.2);
-            transform: translateX(-5px);
-            border-left: 5px solid var(--gold);
-        }
-
-        .interactive-item:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateX(-5px);
-        }
-
-        .interactive-item h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.6em;
-            color: var(--gold)
-        }
-
-        .interactive-item p {
+        .feature-tab h3 {
             margin: 0;
-            font-size: 1em;
-            line-height: 1.5;
-            color: var(--text-secondary);
+            font-size: 1.4em;
+            color: var(--text-white);
+            transition: var(--transition-smooth);
+            font-family: 'Playfair Display', serif;
         }
 
-        .interactive-image-wrapper {
+        .feature-tab p {
+            margin: 0;
+            font-size: 0.95em;
+            color: var(--text-slate);
+            line-height: 1.5;
+        }
+
+        .feature-tab.active {
+            border-color: var(--accent-yellow);
+            background: rgba(234, 179, 8, 0.1);
+            transform: translateX(12px);
+            box-shadow: -10px 0 20px rgba(234, 179, 8, 0.1);
+        }
+
+        .feature-tab.active h3 {
+            color: var(--accent-yellow);
+        }
+
+        .visual-stage {
             flex: 1;
-            position: sticky;
-            top: 150px;
-            height: 500px;
+            position: relative;
+            height: 650px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        
-        .pyramid-neutral-state {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 120px solid transparent;
-            border-right: 120px solid transparent;
-            border-bottom: 210px solid var(--gold);
-            filter: drop-shadow(0 15px 30px rgba(212, 175, 55, 0.2));
-            transition: opacity 0.3s ease-in-out;
-            opacity: 0;
-        }
-        
-        .pyramid-neutral-state.visible {
-            opacity: 1;
+            perspective: 2500px;
         }
 
-        .interactive-image {
-            width: 100%;
-            height: 100%;
-            border-radius: 15px;
+        .image-container {
+            position: absolute;
+            width: 95%;
+            height: 85%;
+            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+            opacity: 0;
+            transform: rotateX(20deg) rotateY(-20deg) translateZ(-500px) scale(0.7);
+            pointer-events: none;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 100px 150px rgba(0,0,0,0.9);
+            border: 1px solid var(--border-dark);
             overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            position: absolute;
+            z-index: 1;
         }
 
-        .interactive-image.visible {
+        .image-container.active {
             opacity: 1;
+            transform: rotateX(0) rotateY(0) translateZ(0) scale(1);
+            pointer-events: auto;
+            z-index: 10;
         }
 
-        .interactive-image img {
+        .image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.08);
         }
 
         .back-link {
-            position: absolute;
+            position: fixed;
             top: 30px;
             left: 30px;
-            color: white;
+            color: var(--text-white);
             text-decoration: none;
-            font-size: 1em;
-            background: rgba(0, 0, 0, 0.6);
+            font-size: 0.9em;
+            background: var(--glass-bg);
             padding: 12px 24px;
-            border-radius: 8px;
-            transition: background 0.3s, color 0.3s;
-            z-index: 1001;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+            transition: var(--transition-smooth);
+            border: 1px solid var(--border-dark);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            font-weight: 500;
         }
 
         .back-link:hover {
-            background: var(--gold);
-            color: var(--bg-darker);
+            background: var(--accent-yellow);
+            color: var(--bg-black);
+            border-color: var(--accent-yellow);
         }
 
-        @media (max-width: 900px) {
-            .interactive-container {
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 1024px) {
+            .warp-showcase {
                 flex-direction: column;
             }
-            .interactive-tabs, .interactive-image-wrapper {
+            .feature-list {
+                flex: 1;
                 width: 100%;
             }
-            .interactive-image-wrapper {
-                position: relative;
-                top: 0;
-                margin-top: 40px;
+            .visual-stage {
                 height: 400px;
+                width: 100%;
             }
         }
     </style>
 </head>
-
 <body>
-    <a href="index.html" class="back-link">← Back to Home</a>
+    <a href="index.html" class="back-link">← Return to Ecosystem</a>
 
-    <div class="content">
-        <h1 class="title">Advanced Gym Management System</h1>
-        <p class="overview">
-            A comprehensive platform designed to streamline operations, enhance member experience, and provide powerful insights. From automating daily tasks to offering seamless integration, we have everything you need to manage your gym efficiently and professionally.
-        </p>
+    <div class="gym-experience-wrapper">
+        <div class="header-section">
+            <h1>Gym Management Ecosystem</h1>
+            <p>Engineered for high-growth fitness centers. We replace operational chaos with mathematical precision, allowing you to scale your facility without increasing your workload.</p>
+        </div>
 
-        <div class="interactive-container">
-            <div class="interactive-tabs">
-                <div class="interactive-item" data-image="Members Management.png">
-                    <h3>Member Management</h3>
-                    <p>Track profiles, attendance, and membership plans with a complete overview of member activities and preferences.</p>
+        <div class="warp-showcase">
+            <div class="feature-list">
+                <div class="feature-tab active" data-img="gym-feature-members.png">
+                    <h3>Member Lifecycle</h3>
+                    <p>Complete profile management with automated renewal tracking and biometric attendance.</p>
                 </div>
-                <div class="interactive-item" data-image="Checking in.png">
-                    <h3>Seamless Check-Ins</h3>
-                    <p>A fast, reliable check-in system that minimizes wait times and enhances the member experience from the moment they arrive.</p>
+                <div class="feature-tab" data-img="gym-feature-checkin.png">
+                    <h3>Rapid Access</h3>
+                    <p>Frictionless check-in systems that eliminate queues and enhance member experience.</p>
                 </div>
-                <div class="interactive-item" data-image="Payment Management.png">
-                    <h3>Automated Payment Processing</h3>
-                    <p>Automate billing, accept online payments, and manage invoices with our secure, multi-gateway payment system.</p>
+                <div class="feature-tab" data-img="gym-feature-payments.png">
+                    <h3>Financial Engine</h3>
+                    <p>Multi-gateway automated billing with real-time revenue leakage detection.</p>
                 </div>
-                <div class="interactive-item" data-image="Reports And Analytics.png">
-                    <h3>Insightful Analytics</h3>
-                    <p>Make data-driven decisions with detailed reports on revenue, member retention, and other key performance indicators.</p>
+                <div class="feature-tab" data-img="gym-feature-analytics.png">
+                    <h3>Strategic Intelligence</h3>
+                    <p>Deep-dive analytics into retention rates and peak-hour utilization.</p>
                 </div>
-                 <div class="interactive-item" data-image="ID card page.png">
-                    <h3>Professional ID Cards</h3>
-                    <p>Enhance security and brand identity with custom member ID cards, printed directly from the system.</p>
+                <div class="feature-tab" data-img="gym-feature-idcard.png">
+                    <h3>Brand Identity</h3>
+                    <p>Professional ID generation and secure digital membership credentials.</p>
                 </div>
             </div>
-            <div class="interactive-image-wrapper">
-                <div class="pyramid-neutral-state"></div>
-                <div class="interactive-image">
-                    <img src="" id="gym-feature-image" alt="Gym Feature">
+
+            <div class="visual-stage">
+                <div class="image-container active" data-img="gym-feature-members.png">
+                    <img src="gym-feature-members.png" alt="Members Management">
+                </div>
+                <div class="image-container" data-img="gym-feature-checkin.png">
+                    <img src="gym-feature-checkin.png" alt="Check-ins">
+                </div>
+                <div class="image-container" data-img="gym-feature-payments.png">
+                    <img src="gym-feature-payments.png" alt="Payments">
+                </div>
+                <div class="image-container" data-img="gym-feature-analytics.png">
+                    <img src="gym-feature-analytics.png" alt="Analytics">
+                </div>
+                <div class="image-container" data-img="gym-feature-idcard.png">
+                    <img src="gym-feature-idcard.png" alt="ID Cards">
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        const interactiveTabsContainer = document.querySelector('.interactive-tabs');
-        const interactiveItems = document.querySelectorAll('.interactive-item');
-        const imageElement = document.getElementById('gym-feature-image');
-        const imageContainer = document.querySelector('.interactive-image');
-        const pyramid = document.querySelector('.pyramid-neutral-state');
+        const tabs = document.querySelectorAll('.feature-tab');
+        const containers = document.querySelectorAll('.image-container');
 
-        function showNeutralState() {
-            interactiveItems.forEach(i => i.classList.remove('active'));
-            imageContainer.classList.remove('visible');
-            pyramid.classList.add('visible');
-        }
+        tabs.forEach(tab => {
+            tab.addEventListener('mouseenter', () => {
+                const img = tab.getAttribute('data-img');
 
-        function showFeature(item) {
-            interactiveItems.forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
 
-            const newImage = item.getAttribute('data-image');
-            if (!imageElement.src.includes(newImage)) {
-                 imageElement.src = newImage;
-            }
-            
-            pyramid.classList.remove('visible');
-            imageContainer.classList.add('visible');
-        }
-
-        // Set initial state
-        document.addEventListener('DOMContentLoaded', showNeutralState);
-
-        interactiveItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                showFeature(item);
+                containers.forEach(c => {
+                    if (c.getAttribute('data-img') === img) {
+                        c.classList.add('active');
+                    } else {
+                        c.classList.remove('active');
+                    }
+                });
             });
-        });
-
-        interactiveTabsContainer.addEventListener('mouseleave', () => {
-            showNeutralState();
         });
     </script>
 </body>
-
 </html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vertex | Secure Client Updates</title>
+  <meta name="description" content="Secure client updates page for Vertex Systems.">
+  <link rel="stylesheet" href="public/styles.css">
+  <style>
+    .updates-hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 60px 60px;
+      background: var(--bg-dark);
+    }
+
+    .updates-content {
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .updates-tagline {
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 30px;
+      animation: fadeIn 1s ease-out 0.5s backwards;
+    }
+
+    .updates-title {
+      font-size: 60px;
+      font-weight: 300;
+      letter-spacing: 15px;
+      margin-bottom: 30px;
+      animation: fadeIn 1s ease-out 1s backwards;
+    }
+
+    .updates-subtitle {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 60px;
+      animation: fadeIn 1s ease-out 1.5s backwards;
+    }
+
+    .file-info-card {
+      border: 1px solid rgba(212, 175, 55, 0.16);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 40px;
+      margin-bottom: 40px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 24px 90px rgba(0, 0, 0, 0.24);
+      animation: fadeIn 1s ease-out 2s backwards;
+    }
+
+    .file-info-card p {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .file-info-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .file-info-card span {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .download-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 50px;
+      border: 2px solid var(--gold);
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(255, 255, 255, 0.06));
+      color: var(--text-primary);
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-out 2.5s backwards;
+    }
+
+    .download-btn-primary:hover:not(:disabled) {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.28), rgba(255, 255, 255, 0.1));
+      border-color: #ffd54f;
+      transform: translateY(-2px);
+      box-shadow: 0 20px 60px rgba(212, 175, 55, 0.18);
+    }
+
+    .download-btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .status-indicator {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      animation: fadeIn 1s ease-out 3s backwards;
+    }
+
+    .status-indicator.ready {
+      color: var(--gold);
+    }
+
+    .gate-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      backdrop-filter: blur(5px);
+    }
+
+    .gate-box {
+      background: rgba(10, 10, 10, 0.9);
+      border: 1px solid rgba(212, 175, 55, 0.16);
+      border-radius: 28px;
+      padding: 60px 50px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 24px 90px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.4s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .gate-box h2 {
+      font-size: 32px;
+      font-weight: 300;
+      letter-spacing: 3px;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+    }
+
+    .gate-box > p:first-of-type {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .password-input-group {
+      margin-bottom: 30px;
+    }
+
+    #passwordInput {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid rgba(212, 175, 55, 0.16);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-primary);
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+      margin-bottom: 15px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    #passwordInput:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+    }
+
+    #passwordInput::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .gate-unlock-btn {
+      width: 100%;
+      padding: 16px 20px;
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(255, 255, 255, 0.06));
+      color: var(--text-primary);
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .gate-unlock-btn:hover {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.28), rgba(255, 255, 255, 0.1));
+      box-shadow: 0 20px 60px rgba(212, 175, 55, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .gate-error {
+      font-size: 12px;
+      color: #ff5c5c;
+      letter-spacing: 1px;
+      margin-top: 15px;
+      display: none;
+    }
+
+    .gate-error.show {
+      display: block;
+    }
+
+    .gate-note {
+      font-size: 12px;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      margin-top: 25px;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .updates-hero {
+        padding: 100px 30px 60px;
+      }
+
+      .updates-title {
+        font-size: 40px;
+        letter-spacing: 8px;
+      }
+
+      .updates-subtitle {
+        font-size: 14px;
+      }
+
+      .file-info-card {
+        padding: 30px;
+      }
+
+      .file-info-card p {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .gate-box {
+        padding: 40px 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="logo-container">
+      <span class="logo-text">VERTEX</span>
+    </div>
+
+    <div class="mobile-menu-toggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="nav-buttons" id="navButtons">
+      <a href="public/index.html#systems" class="nav-button">Systems</a>
+      <a href="clients-updates.html" class="nav-button nav-button-active">Updates</a>
+      <a href="public/index.html#contact" class="nav-button">Contact</a>
+    </div>
+  </nav>
+
+  <section class="updates-hero">
+    <div class="updates-content">
+      <div class="updates-tagline">SECURE ACCESS</div>
+      <h1 class="updates-title">CLIENT UPDATES</h1>
+      <p class="updates-subtitle">Download the latest client update. Enter your secure password to access the download link and keep your system up to date.</p>
+
+      <div class="file-info-card">
+        <p>
+          <span>TARGET</span>
+          <span id="fileName">CLIENT_UPDATE.pkg</span>
+        </p>
+        <p>
+          <span>SIZE</span>
+          <span id="fileSize">34 MB</span>
+        </p>
+        <p>
+          <span>INTEGRITY</span>
+          <span id="fileIntegrity">VERIFIED</span>
+        </p>
+      </div>
+
+      <button class="download-btn-primary" id="downloadBtn" disabled>Initialize Download</button>
+      <div class="status-indicator" id="statusText">PASSWORD REQUIRED</div>
+    </div>
+  </section>
+
+  <div class="gate-overlay" id="gateOverlay">
+    <div class="gate-box">
+      <h2>Protected Download</h2>
+      <p>Enter the password to access the client update download.</p>
+      <div class="password-input-group">
+        <input id="passwordInput" type="password" placeholder="Enter password" autocomplete="off">
+      </div>
+      <button class="gate-unlock-btn" onclick="checkPassword()">Unlock</button>
+      <p class="gate-error" id="gateError"></p>
+      <p class="gate-note">Your password is secure and only used to unlock this download.</p>
+    </div>
+  </div>
+
+  <script src="./clients-updates.js"></script>
+  <script src="public/script.js"></script>
+</body>
+
+</html>
