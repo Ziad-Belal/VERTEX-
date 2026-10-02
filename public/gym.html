@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,13 @@
             font-family: 'Inter', sans-serif;
             margin: 0;
             overflow-x: hidden;
+<<<<<<< HEAD
+=======
+            background-image: url('GYMphotos/Dashboard.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+>>>>>>> c31cb4d3f06e14a116f60ea19e5af2dbff2e126f
         }
 
         .gym-experience-wrapper {
@@ -167,6 +175,17 @@
             color: var(--bg-black);
             border-color: var(--accent-yellow);
         }
+        
+        .mobile-image {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .mobile-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -181,14 +200,69 @@
                 flex: 1;
                 width: 100%;
             }
+<<<<<<< HEAD
             .visual-stage {
                 height: 400px;
                 width: 100%;
+=======
+            .interactive-image-wrapper {
+                display: none;
+            }
+            .interactive-item.active .mobile-image {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 30px;
+            }
+
+            .title {
+                font-size: 2.5em;
+            }
+
+            .overview {
+                font-size: 1.1em;
+            }
+
+            .interactive-item h3 {
+                font-size: 1.4em;
+            }
+
+            .interactive-item p {
+                font-size: 0.9em;
+            }
+
+            .back-link {
+                top: 20px;
+                left: 20px;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2em;
+            }
+
+            .overview {
+                font-size: 1em;
+            }
+
+            .interactive-item {
+                padding: 20px;
+            }
+
+            .interactive-item h3 {
+                font-size: 1.2em;
+>>>>>>> c31cb4d3f06e14a116f60ea19e5af2dbff2e126f
             }
         }
     </style>
 </head>
 <body>
+<<<<<<< HEAD
     <a href="index.html" class="back-link">← Return to Ecosystem</a>
 
     <div class="gym-experience-wrapper">
@@ -218,6 +292,52 @@
                 <div class="feature-tab" data-img="gym-feature-idcard.png">
                     <h3>Brand Identity</h3>
                     <p>Professional ID generation and secure digital membership credentials.</p>
+=======
+    <a href="index.html" class="back-link" data-lang="backLink">← Back to Home</a>
+
+    <div class="content">
+        <h1 class="title" data-lang="title">Advanced Gym Management System</h1>
+        <p class="overview" data-lang="overview">
+            A comprehensive platform designed to streamline operations, enhance member experience, and provide powerful insights. From automating daily tasks to offering seamless integration, we have everything you need to manage your gym efficiently and professionally.
+        </p>
+
+        <div class="interactive-container">
+            <div class="interactive-tabs">
+                <div class="interactive-item" data-image="GYMphotos/Members Management.png">
+                    <h3 data-lang="membersTitle">Member Management</h3>
+                    <p data-lang="membersDesc">Track profiles, attendance, and membership plans with a complete overview of member activities and preferences.</p>
+                    <div class="mobile-image">
+                        <img src="GYMphotos/Members Management.png" alt="Member Management">
+                    </div>
+                </div>
+                <div class="interactive-item" data-image="GYMphotos/Checking in.png">
+                    <h3 data-lang="checkinTitle">Seamless Check-Ins</h3>
+                    <p data-lang="checkinDesc">A fast, reliable check-in system that minimizes wait times and enhances the member experience from the moment they arrive.</p>
+                    <div class="mobile-image">
+                        <img src="GYMphotos/Checking in.png" alt="Seamless Check-Ins">
+                    </div>
+                </div>
+                <div class="interactive-item" data-image="GYMphotos/Payment Management.png">
+                    <h3 data-lang="paymentTitle">Flexible Payment Management</h3>
+                    <p data-lang="paymentDesc">Easily manage member billing, track payments, and generate invoices to streamline your financial operations.</p>
+                    <div class="mobile-image">
+                        <img src="GYMphotos/Payment Management.png" alt="Flexible Payment Management">
+                    </div>
+                </div>
+                <div class="interactive-item" data-image="GYMphotos/Reports And Analytics.png">
+                    <h3 data-lang="analyticsTitle">Insightful Analytics</h3>
+                    <p data-lang="analyticsDesc">Make data-driven decisions with detailed reports on revenue, member retention, and other key performance indicators.</p>
+                    <div class="mobile-image">
+                        <img src="GYMphotos/Reports And Analytics.png" alt="Insightful Analytics">
+                    </div>
+                </div>
+                 <div class="interactive-item" data-image="GYMphotos/ID card page.png">
+                    <h3 data-lang="idTitle">Professional ID Cards</h3>
+                    <p data-lang="idDesc">Enhance security and brand identity with custom member ID cards, printed directly from the system.</p>
+                    <div class="mobile-image">
+                        <img src="GYMphotos/ID card page.png" alt="Professional ID Cards">
+                    </div>
+>>>>>>> c31cb4d3f06e14a116f60ea19e5af2dbff2e126f
                 </div>
             </div>
 
@@ -240,8 +360,14 @@
             </div>
         </div>
     </div>
+    <div class="language-selector">
+        <a href="javascript:void(0)" class="lang-option" onclick="setLanguage('ar')">العربية</a>
+        <span style="color: var(--border-gray);;">/</span>
+        <a href="javascript:void(0)" class="lang-option active" onclick="setLanguage('en')">English</a>
+    </div>
 
     <script>
+<<<<<<< HEAD
         const tabs = document.querySelectorAll('.feature-tab');
         const containers = document.querySelectorAll('.image-container');
 
@@ -261,6 +387,111 @@
                 });
             });
         });
+=======
+        const interactiveItems = document.querySelectorAll('.interactive-item');
+        const isMobile = window.matchMedia("(max-width: 900px)").matches;
+
+        if (isMobile) {
+            interactiveItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const wasActive = item.classList.contains('active');
+                    interactiveItems.forEach(i => i.classList.remove('active'));
+                    if (!wasActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        } else {
+            const imageElement = document.getElementById('gym-feature-image');
+            const imageContainer = document.querySelector('.interactive-image');
+            const pyramid = document.querySelector('.pyramid-neutral-state');
+            const interactiveTabsContainer = document.querySelector('.interactive-tabs');
+
+            function showNeutralState() {
+                interactiveItems.forEach(i => i.classList.remove('active'));
+                imageContainer.classList.remove('visible');
+                pyramid.classList.add('visible');
+            }
+
+            function showFeature(item) {
+                interactiveItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                const newImage = item.getAttribute('data-image');
+                if (imageElement && !imageElement.src.includes(newImage)) {
+                    imageElement.src = newImage;
+                }
+                
+                pyramid.classList.remove('visible');
+                imageContainer.classList.add('visible');
+            }
+
+            document.addEventListener('DOMContentLoaded', showNeutralState);
+
+            interactiveItems.forEach(item => {
+                item.addEventListener('mouseenter', () => showFeature(item));
+            });
+
+            interactiveTabsContainer.addEventListener('mouseleave', showNeutralState);
+        }
+
+        const translations = {
+            en: {
+                backLink: "← Back to Home",
+                title: "Advanced Gym Management System",
+                overview: "A comprehensive platform designed to streamline operations, enhance member experience, and provide powerful insights. From automating daily tasks to offering seamless integration, we have everything you need to manage your gym efficiently and professionally.",
+                membersTitle: "Member Management",
+                membersDesc: "Track profiles, attendance, and membership plans with a complete overview of member activities and preferences.",
+                checkinTitle: "Seamless Check-Ins",
+                checkinDesc: "A fast, reliable check-in system that minimizes wait times and enhances the member experience from the moment they arrive.",
+                paymentTitle: "Flexible Payment Management",
+                paymentDesc: "Easily manage member billing, track payments, and generate invoices to streamline your financial operations.",
+                analyticsTitle: "Insightful Analytics",
+                analyticsDesc: "Make data-driven decisions with detailed reports on revenue, member retention, and other key performance indicators.",
+                idTitle: "Professional ID Cards",
+                idDesc: "Enhance security and brand identity with custom member ID cards, printed directly from the system."
+            },
+            ar: {
+                backLink: "→ العودة إلى الرئيسية",
+                title: "نظام إدارة الجيم المتقدم",
+                overview: "منصة شاملة مصممة لتبسيط العمليات وتعزيز تجربة الأعضاء وتقديم رؤى قوية. من أتمتة المهام اليومية إلى تقديم تكامل سلس ، لدينا كل ما تحتاجه لإدارة صالة الألعاب الرياضية الخاصة بك بكفاءة ومهنية.",
+                membersTitle: "إدارة الأعضاء",
+                membersDesc: "تتبع ملفات التعريف والحضور وخطط العضوية مع نظرة عامة كاملة على أنشطة الأعضاء وتفضيلاتهم.",
+                checkinTitle: "تسجيل دخول سلس",
+                checkinDesc: "نظام تسجيل وصول سريع وموثوق يقلل من أوقات الانتظار ويعزز تجربة الأعضاء من لحظة وصولهم.",
+                paymentTitle: "إدارة مرنة للمدفوعات",
+                paymentDesc: "قم بإدارة فواتير الأعضاء بسهولة ، وتتبع المدفوعات ، وأنشئ الفواتير لتبسيط عملياتك المالية.",
+                analyticsTitle: "تحليلات ثاقبة",
+                analyticsDesc: "اتخذ قرارات تستند إلى البيانات من خلال تقارير مفصلة عن الإيرادات والاحتفاظ بالأعضاء ومؤشرات الأداء الرئيسية الأخرى.",
+                idTitle: "بطاقات هوية احترافية",
+                idDesc: "عزز الأمان وهوية العلامة التجارية باستخدام بطاقات هوية الأعضاء المخصصة ، المطبوعة مباشرة من النظام."
+            }
+        };
+
+        function setLanguage(lang) {
+            const elements = document.querySelectorAll('[data-lang]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            const body = document.body;
+            const arBtn = document.querySelector('.lang-option[onclick="setLanguage(\'ar\')"]');
+            const enBtn = document.querySelector('.lang-option[onclick="setLanguage(\'en\')"]');
+
+            if (lang === 'ar') {
+                body.classList.add('rtl');
+                arBtn.classList.add('active');
+                enBtn.classList.remove('active');
+            } else {
+                body.classList.remove('rtl');
+                enBtn.classList.add('active');
+                arBtn.classList.remove('active');
+            }
+        }
+>>>>>>> c31cb4d3f06e14a116f60ea19e5af2dbff2e126f
     </script>
 </body>
 </html>

@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Management System - Vertex Systems</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-darker: #000000;
+            --gold: #d4af37;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: url('Dashboard.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            padding: 50px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        .title {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .overview {
+            font-size: 1.3em;
+            max-width: 900px;
+            text-align: center;
+            margin-bottom: 50px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            line-height: 1.6;
+        }
+
+        .interactive-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            align-items: flex-start;
+        }
+
+        .interactive-tabs {
+            flex: 0 0 45%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .interactive-item {
+            background: rgba(10, 10, 10, 0.7);
+            padding: 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+            border-left: 5px solid transparent;
+        }
+
+        .interactive-item.active {
+            background: rgba(212, 175, 55, 0.2);
+            transform: translateX(-5px);
+            border-left: 5px solid var(--gold);
+        }
+
+        .interactive-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(-5px);
+        }
+
+        .interactive-item h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.6em;
+            color: var(--gold)
+        }
+
+        .interactive-item p {
+            margin: 0;
+            font-size: 1em;
+            line-height: 1.5;
+            color: var(--text-secondary);
+        }
+
+        .interactive-image-wrapper {
+            flex: 1;
+            position: sticky;
+            top: 150px;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pyramid-neutral-state {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 120px solid transparent;
+            border-right: 120px solid transparent;
+            border-bottom: 210px solid var(--gold);
+            filter: drop-shadow(0 15px 30px rgba(212, 175, 55, 0.2));
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+        }
+        
+        .pyramid-neutral-state.visible {
+            opacity: 1;
+        }
+
+        .interactive-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            position: absolute;
+        }
+
+        .interactive-image.visible {
+            opacity: 1;
+        }
+
+        .interactive-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: background 0.3s, color 0.3s;
+            z-index: 1001;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .back-link:hover {
+            background: var(--gold);
+            color: var(--bg-darker);
+        }
+
+        .mobile-image {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .mobile-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 900px) {
+            .interactive-container {
+                flex-direction: column;
+            }
+            .interactive-tabs, .interactive-image-wrapper {
+                width: 100%;
+            }
+            .interactive-image-wrapper {
+                display: none;
+            }
+            .interactive-item.active .mobile-image {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 30px;
+            }
+
+            .title {
+                font-size: 2.5em;
+            }
+
+            .overview {
+                font-size: 1.1em;
+            }
+
+            .interactive-item h3 {
+                font-size: 1.4em;
+            }
+
+            .interactive-item p {
+                font-size: 0.9em;
+            }
+
+            .back-link {
+                top: 20px;
+                left: 20px;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2em;
+            }
+
+            .overview {
+                font-size: 1em;
+            }
+
+            .interactive-item {
+                padding: 20px;
+            }
+
+            .interactive-item h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html" class="back-link">← Back to Home</a>
+
+    <div class="content">
+        <h1 class="title">Comprehensive Retail Management System</h1>
+        <p class="overview">
+            A complete solution for your retail business, featuring a powerful point of sale, inventory management, customer relationship tools, and in-depth analytics to drive growth.
+        </p>
+
+        <div class="interactive-container">
+            <div class="interactive-tabs">
+                <!-- Feature 1 -->
+                <div class="interactive-item" data-image="/* PHOTO_PLACEHOLDER_1 */">
+                    <h3>Point of Sale (POS)</h3>
+                    <p>Process transactions quickly and efficiently with our user-friendly POS system, designed for a seamless checkout experience.</p>
+                    <div class="mobile-image">
+                        <img src="/* PHOTO_PLACEHOLDER_1 */" alt="Point of Sale (POS)">
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="interactive-item" data-image="/* PHOTO_PLACEHOLDER_2 */">
+                    <h3>Inventory Management</h3>
+                    <p>Track stock levels, manage product variants, and automate purchase orders to keep your shelves stocked with best-selling items.</p>
+                    <div class="mobile-image">
+                        <img src="/* PHOTO_PLACEHOLDER_2 */" alt="Inventory Management">
+                    </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="interactive-item" data-image="/* PHOTO_PLACEHOLDER_3 */">
+                    <h3>Customer Relationship Management (CRM)</h3>
+                    <p>Build customer loyalty with a built-in CRM. Track purchase history, manage loyalty programs, and send targeted promotions.</p>
+                    <div class="mobile-image">
+                        <img src="/* PHOTO_PLACEHOLDER_3 */" alt="Customer Relationship Management (CRM)">
+                    </div>
+                </div>
+                <!-- Feature 4 -->
+                <div class="interactive-item" data-image="/* PHOTO_PLACEHOLDER_4 */">
+                    <h3>Analytics & Reporting</h3>
+                    <p>Gain valuable insights into your sales, customers, and inventory with our powerful analytics and reporting tools.</p>
+                    <div class="mobile-image">
+                        <img src="/* PHOTO_PLACEHOLDER_4 */" alt="Analytics & Reporting">
+                    </div>
+                </div>
+            </div>
+            <div class="interactive-image-wrapper">
+                <div class="pyramid-neutral-state"></div>
+                <div class="interactive-image">
+                    <img src="" id="feature-image" alt="Retail Feature">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const interactiveItems = document.querySelectorAll('.interactive-item');
+        const isMobile = window.matchMedia("(max-width: 900px)").matches;
+
+        if (isMobile) {
+            interactiveItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const wasActive = item.classList.contains('active');
+                    interactiveItems.forEach(i => i.classList.remove('active'));
+                    if (!wasActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        } else {
+            const imageElement = document.getElementById('feature-image');
+            const imageContainer = document.querySelector('.interactive-image');
+            const pyramid = document.querySelector('.pyramid-neutral-state');
+            const interactiveTabsContainer = document.querySelector('.interactive-tabs');
+
+            function showNeutralState() {
+                interactiveItems.forEach(i => i.classList.remove('active'));
+                imageContainer.classList.remove('visible');
+                pyramid.classList.add('visible');
+            }
+
+            function showFeature(item) {
+                interactiveItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+
+                const newImage = item.getAttribute('data-image');
+                if (imageElement && !imageElement.src.includes(newImage)) {
+                    imageElement.src = newImage;
+                }
+                
+                pyramid.classList.remove('visible');
+                imageContainer.classList.add('visible');
+            }
+
+            document.addEventListener('DOMContentLoaded', showNeutralState);
+
+            interactiveItems.forEach(item => {
+                item.addEventListener('mouseenter', () => showFeature(item));
+            });
+
+            interactiveTabsContainer.addEventListener('mouseleave', showNeutralState);
+        }
+    </script>
+</body>
+
+</html>

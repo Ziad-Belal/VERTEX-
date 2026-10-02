@@ -1,5 +1,29 @@
 {
+<<<<<<< HEAD
   "dependencies": {
     "framer-motion": "^14.0.0"
   }
 }
+=======
+    "name": "vertex-saas-landing",
+    "private": true,
+    "version": "0.1.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-react": "^4.3.2",
+        "autoprefixer": "^10.4.19",
+        "postcss": "^8.4.35",
+        "tailwindcss": "^3.4.4",
+        "vite": "^5.4.1"
+    }
+}
+>>>>>>> c31cb4d3f06e14a116f60ea19e5af2dbff2e126f
