@@ -263,14 +263,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 6. Navigation Scroll Effect
+    const nav = document.querySelector('nav');
+    let navIsScrolled = false;
     window.addEventListener('scroll', () => {
-        const nav = document.querySelector('nav');
-        if (window.scrollY > 50) {
-            nav.style.transform = 'translateX(-50%) scale(0.95)';
-            nav.style.backgroundColor = 'rgba(0,0,0,0.9)';
-        } else {
-            nav.style.transform = 'translateX(-50%) scale(1)';
-            nav.style.backgroundColor = 'rgba(0,0,0,0.7)';
-        }
-    });
+        const isScrolled = window.scrollY > 50;
+        if (isScrolled === navIsScrolled) return;
+
+        navIsScrolled = isScrolled;
+        nav.style.transform = `translateX(-50%) scale(${isScrolled ? 0.95 : 1})`;
+        nav.style.backgroundColor = isScrolled ? 'rgba(0,0,0,0.9)' : 'rgba(0,0,0,0.7)';
+    }, { passive: true });
 });
