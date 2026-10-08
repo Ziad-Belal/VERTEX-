@@ -1,353 +1,371 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Management System - Vertex Systems</title>
+    <title>Restaurant Platform | Vertex Systems</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
     <style>
-        :root {
-            --bg-dark: #0a0a0a;
-            --bg-darker: #000000;
-            --gold: #d4af37;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-        }
-
         body {
+            background: #000;
+            color: var(--text-white);
+            font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 0;
             overflow-x: hidden;
-            background-image: url('Dashboard.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
         }
 
-        .content {
-            position: relative;
-            z-index: 1;
-            color: white;
-            padding: 50px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
+        .page-glow {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 0%, #0a0a0a 0%, #000 100%);
         }
 
-        .title {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        .floating-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: var(--accent-yellow);
+            filter: blur(120px);
+            opacity: 0.1;
+            border-radius: 50%;
+            z-index: -1;
+            animation: drift 30s infinite alternate ease-in-out;
         }
 
-        .overview {
-            font-size: 1.3em;
-            max-width: 900px;
-            text-align: center;
-            margin-bottom: 50px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-            line-height: 1.6;
-        }
+        @keyframes drift {
+            0% {
+                transform: translate(-10%, -10%) scale(1);
+            }
 
-        .interactive-container {
-            display: flex;
-            gap: 40px;
-            max-width: 1200px;
-            width: 100%;
-            align-items: flex-start;
-        }
-
-        .interactive-tabs {
-            flex: 0 0 45%;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .interactive-item {
-            background: rgba(10, 10, 10, 0.7);
-            padding: 25px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s, background 0.3s;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: left;
-            border-left: 5px solid transparent;
-        }
-
-        .interactive-item.active {
-            background: rgba(212, 175, 55, 0.2);
-            transform: translateX(-5px);
-            border-left: 5px solid var(--gold);
-        }
-
-        .interactive-item:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateX(-5px);
-        }
-
-        .interactive-item h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.6em;
-            color: var(--gold)
-        }
-
-        .interactive-item p {
-            margin: 0;
-            font-size: 1em;
-            line-height: 1.5;
-            color: var(--text-secondary);
-        }
-
-        .interactive-image-wrapper {
-            flex: 1;
-            position: sticky;
-            top: 150px;
-            height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .pyramid-neutral-state {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 120px solid transparent;
-            border-right: 120px solid transparent;
-            border-bottom: 210px solid var(--gold);
-            filter: drop-shadow(0 15px 30px rgba(212, 175, 55, 0.2));
-            transition: opacity 0.3s ease-in-out;
-            opacity: 0;
-        }
-        
-        .pyramid-neutral-state.visible {
-            opacity: 1;
-        }
-
-        .interactive-image {
-            width: 100%;
-            height: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            position: absolute;
-        }
-
-        .interactive-image.visible {
-            opacity: 1;
-        }
-
-        .interactive-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            100% {
+                transform: translate(20%, 20%) scale(1.2);
+            }
         }
 
         .back-link {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            color: white;
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            z-index: 100;
+            padding: 10px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-dark);
+            border-radius: 100px;
+            color: var(--text-white);
             text-decoration: none;
-            font-size: 1em;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 12px 24px;
-            border-radius: 8px;
-            transition: background 0.3s, color 0.3s;
-            z-index: 1001;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition-fast);
         }
 
         .back-link:hover {
-            background: var(--gold);
-            color: var(--bg-darker);
+            background: var(--accent-yellow);
+            color: black;
+            border-color: var(--accent-yellow);
+            transform: translateX(5px);
         }
 
-        .mobile-image {
-            display: none;
-            margin-top: 20px;
+        .system-experience {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 140px 24px 80px;
         }
 
-        .mobile-image img {
+        .header-section {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .header-section h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 6vw, 64px);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .header-section p {
+            color: var(--text-slate);
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .warp-showcase {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .feature-tab {
+            background: var(--bg-dark);
+            border: 1px solid var(--border-dark);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-align: left;
+            color: var(--text-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            height: 100%;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(234, 179, 8, 0.1), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
         }
 
-        @media (max-width: 900px) {
-            .interactive-container {
-                flex-direction: column;
+        .feature-tab:hover::before {
+            opacity: 1;
+        }
+
+        .feature-tab:hover {
+            border-color: var(--accent-yellow);
+            transform: translateX(10px);
+            background: rgba(234, 179, 8, 0.02);
+        }
+
+        .feature-tab.active {
+            border-color: var(--accent-yellow);
+            background: rgba(234, 179, 8, 0.05);
+            box-shadow: 0 0 30px rgba(234, 179, 8, 0.1);
+        }
+
+        .feature-tab h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 8px;
+            transition: var(--transition-fast);
+        }
+
+        .feature-tab.active h2 {
+            color: var(--accent-yellow);
+        }
+
+        .feature-tab p {
+            font-size: 15px;
+            color: var(--text-slate);
+            margin: 0;
+        }
+
+        .visual-stage {
+            position: relative;
+            height: 600px;
+            perspective: 2000px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stage-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .stage-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80%;
+            height: 80%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-dark);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .stage-image.active {
+            opacity: 1;
+            z-index: 10;
+            transform: translate(-50%, -50%) rotateY(0deg) rotateX(0deg) translateZ(0px) scale(1);
+        }
+
+        .stage-image.prev {
+            opacity: 0;
+            transform: translate(-60%, -50%) rotateY(-20deg) rotateX(10deg) translateZ(-200px) scale(0.8);
+        }
+
+        .stage-image.next {
+            opacity: 0;
+            transform: translate(-40%, -50%) rotateY(20deg) rotateX(10deg) translateZ(-200px) scale(0.8);
+        }
+
+        @media (max-width: 1024px) {
+            .warp-showcase {
+                grid-template-columns: 1fr;
             }
-            .interactive-tabs, .interactive-image-wrapper {
-                width: 100%;
-            }
-            .interactive-image-wrapper {
-                display: none;
-            }
-            .interactive-item.active .mobile-image {
-                display: block;
+
+            .visual-stage {
+                order: -1;
+                height: 400px;
             }
         }
 
-        @media (max-width: 768px) {
-            .content {
-                padding: 30px;
+        @media (max-width: 600px) {
+            .system-experience {
+                padding: 100px 20px 40px;
             }
 
-            .title {
-                font-size: 2.5em;
+            .header-section {
+                text-align: left;
             }
 
-            .overview {
-                font-size: 1.1em;
+            .header-section h1 {
+                font-size: 36px;
             }
 
-            .interactive-item h3 {
-                font-size: 1.4em;
+            .warp-showcase {
+                gap: 20px;
             }
 
-            .interactive-item p {
-                font-size: 0.9em;
+            .feature-list {
+                gap: 12px;
             }
 
-            .back-link {
-                top: 20px;
-                left: 20px;
-                padding: 10px 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .title {
-                font-size: 2em;
-            }
-
-            .overview {
-                font-size: 1em;
-            }
-
-            .interactive-item {
-                padding: 20px;
-            }
-
-            .interactive-item h3 {
-                font-size: 1.2em;
+            .feature-tab {
+                padding: 16px;
             }
         }
     </style>
 </head>
 
 <body>
-    <a href="index.html" class="back-link">← Back to Home</a>
+    <div class="page-glow"></div>
+    <div class="floating-orb" style="top: 10%; left: 20%;"></div>
+    <div class="floating-orb" style="bottom: 10%; right: 10%; animation-delay: -10s;"></div>
 
-    <div class="content">
-        <h1 class="title">Advanced Restaurant Management System</h1>
-        <p class="overview">
-            An all-in-one platform to manage every aspect of your restaurant, from orders and table management to inventory and delivery. Enhance customer experience and boost your bottom line.
-        </p>
+    <a href="index.html" class="back-link">← Return to Ecosystem</a>
 
-        <div class="interactive-container">
-            <div class="interactive-tabs">
-                <!-- Feature 1 -->
-                <div class="interactive-item" data-image="/* PHOTO_PLACEHOLDER_1 */">
-                    <h3>Point of Sale (POS)</h3>
-                    <p>A fast and intuitive POS system for seamless order taking, payment processing, and table management.</p>
-                    <div class="mobile-image">
-                        <img src="/* PHOTO_PLACEHOLDER_1 */" alt="Point of Sale (POS)">
-                    </div>
+    <main class="system-experience">
+        <header class="header-section">
+            <h1>Restaurant Platform</h1>
+            <p>Omni-channel orchestration for high-volume hospitality. We streamline the path from order to table with
+                mathematical precision.</p>
+        </header>
+
+        <section class="warp-showcase">
+            <div class="feature-list">
+                <div class="feature-tab active" data-image="placeholder.svg">
+                    <h2>Kitchen Display System</h2>
+                    <p>Real-time order routing and timing to eliminate kitchen chaos and reduce wait times.</p>
                 </div>
-                <!-- Feature 2 -->
-                <div class="interactive-item" data-image="/* PHOTO_PLACEHOLDER_2 */">
-                    <h3>Kitchen Display System</h3>
-                    <p>Send orders directly to the kitchen, reduce errors, and improve order fulfillment times with a real-time display.</p>
-                    <div class="mobile-image">
-                        <img src="/* PHOTO_PLACEHOLDER_2 */" alt="Kitchen Display System">
-                    </div>
+                <div class="feature-tab" data-image="placeholder.svg">
+                    <h2>Table Management</h2>
+                    <p>Intelligent seating algorithms to maximize turnover and optimize server efficiency.</p>
                 </div>
-                <!-- Feature 3 -->
-                <div class="interactive-item" data-image="/* PHOTO_PLACEHOLDER_3 */">
-                    <h3>Inventory Control</h3>
-                    <p>Track ingredients, manage stock levels, and get alerts for low inventory to minimize waste and control costs.</p>
-                    <div class="mobile-image">
-                        <img src="/* PHOTO_PLACEHOLDER_3 */" alt="Inventory Control">
-                    </div>
+                <div class="feature-tab" data-image="placeholder.svg">
+                    <h2>Omni-channel POS</h2>
+                    <p>Unified interface for dine-in, takeout, and delivery apps with instant sync.</p>
                 </div>
-                <!-- Feature 4 -->
-                <div class="interactive-item" data-image="/* PHOTO_PLACEHOLDER_4 */">
-                    <h3>Delivery Integration</h3>
-                    <p>Manage online orders and deliveries from a single platform, with support for popular delivery services.</p>
-                    <div class="mobile-image">
-                        <img src="/* PHOTO_PLACEHOLDER_4 */" alt="Delivery Integration">
-                    </div>
+                <div class="feature-tab" data-image="placeholder.svg">
+                    <h2>Inventory Logic</h2>
+                    <p>Automated ingredient tracking and waste reduction analysis to protect margins.</p>
                 </div>
             </div>
-            <div class="interactive-image-wrapper">
-                <div class="pyramid-neutral-state"></div>
-                <div class="interactive-image">
-                    <img src="" id="feature-image" alt="Restaurant Feature">
-                </div>
+
+            <div class="visual-stage">
+                <div class="stage-container" id="stage"></div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <script>
-        const interactiveItems = document.querySelectorAll('.interactive-item');
-        const isMobile = window.matchMedia("(max-width: 900px)").matches;
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.feature-tab');
+            const stage = document.getElementById('stage');
 
-        if (isMobile) {
-            interactiveItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    const wasActive = item.classList.contains('active');
-                    interactiveItems.forEach(i => i.classList.remove('active'));
-                    if (!wasActive) {
-                        item.classList.add('active');
+            tabs.forEach((tab, index) => {
+                const img = document.createElement('img');
+                img.src = tab.dataset.image;
+                img.className = 'stage-image' + (index === 0 ? ' active' : '');
+                img.dataset.index = index;
+                stage.appendChild(img);
+            });
+
+            const images = document.querySelectorAll('.stage-image');
+
+            tabs.forEach((tab) => {
+                tab.setAttribute('role', 'button');
+                tab.setAttribute('tabindex', '0');
+                tab.setAttribute('aria-pressed', String(tab.classList.contains('active')));
+                const activate = () => {
+                    tab.dispatchEvent(new MouseEvent('mouseenter'));
+                    tabs.forEach(item => item.setAttribute('aria-pressed', String(item === tab)));
+                };
+                tab.addEventListener('click', activate);
+                tab.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        activate();
                     }
                 });
-            });
-        } else {
-            const imageElement = document.getElementById('feature-image');
-            const imageContainer = document.querySelector('.interactive-image');
-            const pyramid = document.querySelector('.pyramid-neutral-state');
-            const interactiveTabsContainer = document.querySelector('.interactive-tabs');
-
-            function showNeutralState() {
-                interactiveItems.forEach(i => i.classList.remove('active'));
-                imageContainer.classList.remove('visible');
-                pyramid.classList.add('visible');
-            }
-
-            function showFeature(item) {
-                interactiveItems.forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
-
-                const newImage = item.getAttribute('data-image');
-                if (imageElement && !imageElement.src.includes(newImage)) {
-                    imageElement.src = newImage;
-                }
-                
-                pyramid.classList.remove('visible');
-                imageContainer.classList.add('visible');
-            }
-
-            document.addEventListener('DOMContentLoaded', showNeutralState);
-
-            interactiveItems.forEach(item => {
-                item.addEventListener('mouseenter', () => showFeature(item));
+                tab.addEventListener('mouseenter', () => {
+                    tabs.forEach(item => item.setAttribute('aria-pressed', String(item === tab)));
+                });
             });
 
-            interactiveTabsContainer.addEventListener('mouseleave', showNeutralState);
-        }
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('mouseenter', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    images.forEach((img, i) => {
+                        img.classList.remove('active', 'prev', 'next');
+                        if (i === index) {
+                            img.classList.add('active');
+                        } else if (i < index) {
+                            img.classList.add('prev');
+                        } else {
+                            img.classList.add('next');
+                        }
+                    });
+                });
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                tabs.forEach(tab => {
+                    const rect = tab.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    tab.style.setProperty('--mouse-x', x + '%');
+                    tab.style.setProperty('--mouse-y', y + '%');
+                });
+            });
+        });
     </script>
 </body>
 
